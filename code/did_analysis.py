@@ -2,6 +2,9 @@
 # Estimates the average treatment effect of turning off eBay's paid search.
 # Uses preprocessed pivot tables from preprocess.py.
 # Output: LaTeX table in output/tables/did_table.tex
+# Computes the difference-in-differences estimate for the eBay paid search experiment.
+# Method: Compare pre-post log revenue changes between treatment and control DMAs.
+# Reference: Blake et al. (2014), Taddy 
 
 import pandas as pd
 import numpy as np
