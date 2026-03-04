@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+
+\title{The Effect of Paid Search Advertising on Revenue: \\
+A Replication of the eBay Natural Experiment}
+\author{Caroline Allman}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This paper asks: what is the causal effect of paid search advertising on eBay's revenue? Firms spend
+large amounts on search engine marketing (SEM), but measuring its true impact is difficult because
+advertising is typically targeted toward markets or times when demand is already high. To address this
+endogeneity problem, we rely on a natural experiment described by Blake, Nosko, and Tadelis (2014),
+in which eBay temporarily turned off paid search ads in selected markets. Using a difference-in-differences
+(DID) design, we estimate how revenue changed in treated markets relative to untreated markets during
+the advertising shutdown.
+
+\section{Experimental Setting}
+Blake et al. (2014) worked with eBay to pause bidding on Google AdWords in a subset of U.S. designated
+market areas (DMAs). Treatment began on May 22, 2012 and lasted for eight weeks. In treated DMAs,
+paid search was turned off (search\_stays\_on = 0), while in control DMAs it remained on
+(search\_stays\_on = 1). The experiment was not fully randomized: the largest DMAs were excluded from
+treatment, which creates systematic baseline differences in revenue between the treatment and control groups.
+
+Because treated and control DMAs differ in levels before the intervention, a simple comparison of average
+revenue is not appropriate. Instead, we use a DID approach that compares changes over time in treated
+markets to changes over time in control markets. Under the parallel trends assumption, the DID estimator
+isolates the effect of turning off paid search advertising.
+
+\section{Data and Figures}
+The dataset contains daily revenue observations for 210 DMAs from April through July 2012. Key variables
+include the date, DMA identifier, treatment group, post-treatment period indicator, and revenue. The
+analysis first visualizes average revenue patterns for the treatment and control groups and then estimates
+a DID model.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../output/figures/figure_5_2.png}
+\caption{Average revenue for treatment and control DMAs over time.
+The dashed line marks May 22, 2012, when SEM was turned off
+for the treatment group.}
+\label{fig:revenue}
+\end{figure}
+
+Figure \ref{fig:revenue} shows that the control group has higher average revenue throughout the sample,
+which is consistent with the design choice to exclude the largest DMAs from treatment. Both groups exhibit
+similar week-to-week oscillation patterns, suggesting shared seasonality and demand cycles. At this scale,
+there is no dramatic divergence visible at the treatment date, which motivates looking at a transformed
+version of the series and then estimating the DID formally.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.85\textwidth]{../output/figures/figure_5_3.png}
+\caption{Log-scale average revenue difference between control and treatment
+groups over time. The gap appears to increase after May 22.}
+\label{fig:logdiff}
+\end{figure}
+
+Figure \ref{fig:logdiff} plots the log-scale difference (equivalently, the log ratio) between control and
+treatment group average revenues. Before May 22, the series fluctuates around a relatively stable level.
+After the intervention, the gap appears to increase slightly, which is consistent with treated markets
+experiencing a modest decline in revenue relative to controls. This visual pattern provides motivation for
+the DID regression results reported next.
+
+\section{Results}
+\input{../output/tables/did_table.tex}
+
+The DID estimate in logs is negative and small: $\hat{\gamma} \approx -0.0066$. Interpreting this in levels,
+$\exp(\hat{\gamma}) \approx 0.9934$, which corresponds to about a 0.66\% decline in revenue in treatment
+DMAs when paid search was turned off. However, the 95\% confidence interval includes zero
+(approximately $[-0.0175, 0.0043]$), implying the effect is not statistically significant at the 5\% level.
+Economically, this suggests that paid search has little measurable effect on revenue for a well-known brand
+like eBay, potentially because many users would find eBay through organic search even without paid ads.
+
+\section{Conclusion}
+Using a difference-in-differences design and eBay's natural experiment, we find a small and statistically
+insignificant reduction in revenue when paid search advertising is turned off. This replicates the core
+finding of Blake et al. (2014): for an established brand, the incremental return to paid search is limited.
+Important limitations are that the revenue data are scaled/shifted rather than raw dollar amounts, the
+treatment assignment was not fully randomized, and the analysis uses a simple DID framework rather than
+a richer regression specification. Still, the results highlight why causal identification is critical when
+evaluating marketing ROI.
+
+\begin{thebibliography}{9}
+\bibitem{blake2014}
+Blake, T., C. Nosko, and S. Tadelis (2014).
+Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment.
+\textit{Econometrica}, 83(1): 155--174.
+
+\bibitem{taddy2019}
+Taddy, M. (2019).
+\textit{Business Data Science}. McGraw-Hill, Chapter 5.
+\end{thebibliography}
+
+\end{document}
