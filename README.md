@@ -45,18 +45,12 @@ LaTeX with:
 
 ## How to Reproduce
 
-Clone the repository and run:
-
+```bash
+git clone git@github.com:carolineallman/ebay_replication.git
+cd ebay_replication
 bash run_all.sh
 
-This will:
-1. Generate figures
-2. Estimate the DID model
-3. Compile the research paper
 
-The final output is located at:
-
-paper/paper.pdf
 
 ## Results
 
