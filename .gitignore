@@ -1,4 +1,5 @@
-temp/
+temp/*.csv
+!temp/.gitkeeptemp/
 __pycache__/
 *.pyc
 .DS_Store
