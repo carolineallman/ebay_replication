@@ -44,3 +44,8 @@ clean:
 #    - output/figures/figure_5_3.png
 #    - output/tables/did_table.tex
 
+# Reflection:
+# The Makefile makes the dependency structure of the project explicit, while run_all.sh only listed commands in order.
+# By reading the Makefile, a collaborator can immediately see which outputs depend on which scripts and inputs.
+# It also makes clear which steps need to rerun when a file changes, instead of rerunning the entire pipeline every time.
+# This makes the workflow more efficient and better documented.
